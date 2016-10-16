@@ -42,7 +42,21 @@ namespace GA_Example
                 {
                     lb_Path.Text = path;
                     content = reader.ReadToEnd();
-                    txt_Result.Text = content;
+
+                    char[] delimiterChars = { ' ', ',', '.', ':', '\t' };
+
+                    //string text = "one\ttwo three:four,five six seven";
+                    //System.Console.WriteLine("Original text: '{0}'", text);
+
+                    string[] words = content.Split(delimiterChars);
+                    //System.Console.WriteLine("{0} words in text:", words.Length);
+
+                    for (int i = 0; i < words.Length; i++)
+                    {
+                        txt_Result.AppendText(words[i].ToString() + "\n");
+                    }
+
+                        //txt_Result.Text = content;
                 }
             }
         }
@@ -70,16 +84,21 @@ namespace GA_Example
             double[] values;
             double fitness;
             ga.GetBest(out values, out fitness);
-            System.Console.WriteLine("Best ({0}):", fitness);
-            for (int i = 0; i < values.Length; i++)
-                System.Console.WriteLine("{0} ", values[i]);
+            //System.Console.WriteLine("Best ({0}):", fitness);
+            //for (int i = 0; i < values.Length; i++)
+            //    System.Console.WriteLine("{0} ", values[i]);
+            //label2.Text = fitness.ToString();
+            txt_Result.AppendText(fitness.ToString() + "\n");
 
             ga.GetWorst(out values, out fitness);
-            System.Console.WriteLine("\nWorst ({0}):", fitness);
-            for (int i = 0; i < values.Length; i++)
-                System.Console.WriteLine("{0} ", values[i]);
+            txt_Result.AppendText(fitness.ToString() + "\n");
+            //label3.Text = fitness.ToString();
+            //System.Console.WriteLine("\nWorst ({0}):", fitness);
+            //for (int i = 0; i < values.Length; i++)
+            //    System.Console.WriteLine("{0} ", values[i]);
 
-            Console.ReadLine();
+            //Console.ReadLine();
+            
         }
 
         //  optimal solution for this is (0.5,0.5)
