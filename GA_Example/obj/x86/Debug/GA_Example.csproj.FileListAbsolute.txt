@@ -1,0 +1,8 @@
+I:\CHUYEN MON\KHOA LUAN TOT NGHIEP\Example\GA_Example\GA_Example\bin\Debug\GA_Example.exe
+I:\CHUYEN MON\KHOA LUAN TOT NGHIEP\Example\GA_Example\GA_Example\bin\Debug\GA_Example.pdb
+I:\CHUYEN MON\KHOA LUAN TOT NGHIEP\Example\GA_Example\GA_Example\obj\x86\Debug\GA_Example.Form1.resources
+I:\CHUYEN MON\KHOA LUAN TOT NGHIEP\Example\GA_Example\GA_Example\obj\x86\Debug\GA_Example.Properties.Resources.resources
+I:\CHUYEN MON\KHOA LUAN TOT NGHIEP\Example\GA_Example\GA_Example\obj\x86\Debug\GA_Example.csproj.GenerateResource.Cache
+I:\CHUYEN MON\KHOA LUAN TOT NGHIEP\Example\GA_Example\GA_Example\obj\x86\Debug\GA_Example.exe
+I:\CHUYEN MON\KHOA LUAN TOT NGHIEP\Example\GA_Example\GA_Example\obj\x86\Debug\GA_Example.pdb
+I:\CHUYEN MON\KHOA LUAN TOT NGHIEP\Example\GA_Example\GA_Example\obj\x86\Debug\GA_Example.csprojResolveAssemblyReference.cache

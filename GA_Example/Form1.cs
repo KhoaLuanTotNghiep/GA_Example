@@ -20,10 +20,13 @@ namespace GA_Example
 
         private void Form1_Load(object sender, EventArgs e)
         {
-
+            System.Windows.Forms.ToolTip ToolTip1 = new System.Windows.Forms.ToolTip();
+            ToolTip1.SetToolTip(this.btnMoVB, "Mở văn bản");
+            System.Windows.Forms.ToolTip ToolTip2 = new System.Windows.Forms.ToolTip();
+            ToolTip2.SetToolTip(this.btnTim, "Tìm");
         }
 
-        private void btn_LoadFile_Click(object sender, EventArgs e)
+        private void btn_MoVB_Click(object sender, EventArgs e)
         {
             //DialogResult result = openFileDialog1.ShowDialog();
             //if (result == DialogResult.OK) // Test result.
@@ -40,7 +43,7 @@ namespace GA_Example
                 string content;
                 using (StreamReader reader = new StreamReader(new FileStream(path, FileMode.Open), new UTF8Encoding())) // do anything you want, e.g. read it
                 {
-                    lb_Path.Text = path;
+                    txtDuongDan.Text = path;
                     content = reader.ReadToEnd();
 
                     char[] delimiterChars = { ' ', ',', '.', ':', '\t' };
@@ -53,7 +56,7 @@ namespace GA_Example
 
                     for (int i = 0; i < words.Length; i++)
                     {
-                        txt_Result.AppendText(words[i].ToString() + "\n");
+                        txtVanBan.AppendText(words[i].ToString() + "\n");
                     }
 
                         //txt_Result.Text = content;
@@ -88,10 +91,10 @@ namespace GA_Example
             //for (int i = 0; i < values.Length; i++)
             //    System.Console.WriteLine("{0} ", values[i]);
             //label2.Text = fitness.ToString();
-            txt_Result.AppendText(fitness.ToString() + "\n");
+            txtVanBan.AppendText(fitness.ToString() + "\n");
 
             ga.GetWorst(out values, out fitness);
-            txt_Result.AppendText(fitness.ToString() + "\n");
+            txtVanBan.AppendText(fitness.ToString() + "\n");
             //label3.Text = fitness.ToString();
             //System.Console.WriteLine("\nWorst ({0}):", fitness);
             //for (int i = 0; i < values.Length; i++)
@@ -114,5 +117,20 @@ namespace GA_Example
 		        double f1 = Math.Pow(15*x*y*(1-x)*(1-y)*Math.Sin(n*Math.PI*x)*Math.Sin(n*Math.PI*y),2);
 		        return f1;
 	        }
+
+            private void groupBox2_Enter(object sender, EventArgs e)
+            {
+
+            }
+
+            private void txt_Path_TextChanged(object sender, EventArgs e)
+            {
+
+            }
+
+            private void groupBox5_Enter(object sender, EventArgs e)
+            {
+
+            }
     }
 }
