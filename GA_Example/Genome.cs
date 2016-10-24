@@ -32,6 +32,7 @@ namespace btl.generic
 	{
 
         public double[] m_genes;
+        public string[] m_word_genes;
         private int m_length;
         private double m_fitness;
         static Random m_random = new Random();
@@ -64,6 +65,13 @@ namespace btl.generic
 			for (int i = 0 ; i < m_length ; i++)
 				m_genes[i] = genes[i];
 		}
+
+        public Genome(string gene)
+        {
+            m_length = gene.Length;
+            m_word_genes = new string[m_length];
+            CreateCharacterGenes(gene);
+        }
 		 
 
 		private void CreateGenes()
@@ -72,6 +80,14 @@ namespace btl.generic
 			for (int i = 0 ; i < m_length ; i++)
 				m_genes[i] = m_random.NextDouble();
 		}
+
+        public void CreateCharacterGenes(string gene)
+        {
+            for (int i = 0; i < m_length; i++)
+            {
+                m_word_genes[i] = gene[i].ToString();
+            }
+        }
 
 		public void Crossover(ref Genome genome2, out Genome child1, out Genome child2)
 		{
@@ -126,6 +142,7 @@ namespace btl.generic
 		
 
 		private static double m_mutationRate;
+        private string p;
 
 		public double Fitness
 		{

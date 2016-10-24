@@ -18,6 +18,8 @@ namespace GA_Example
             InitializeComponent();
         }
 
+        string[] words;
+
         private void Form1_Load(object sender, EventArgs e)
         {
             System.Windows.Forms.ToolTip ToolTip1 = new System.Windows.Forms.ToolTip();
@@ -26,13 +28,13 @@ namespace GA_Example
             ToolTip2.SetToolTip(this.btnTim, "Tìm");
         }
 
-        private void btn_MoVB_Click(object sender, EventArgs e)
+        private void btnMoVB_Click(object sender, EventArgs e)
         {
             //DialogResult result = openFileDialog1.ShowDialog();
             //if (result == DialogResult.OK) // Test result.
             //{
-                //Do whatever you want
-                //openFileDialog1.FileName .....
+            //Do whatever you want
+            //openFileDialog1.FileName .....
             //}
             OpenFileDialog dialog = new OpenFileDialog();
             dialog.Filter = "Text files | *.txt"; // file types, that will be allowed to upload
@@ -51,7 +53,7 @@ namespace GA_Example
                     //string text = "one\ttwo three:four,five six seven";
                     //System.Console.WriteLine("Original text: '{0}'", text);
 
-                    string[] words = content.Split(delimiterChars);
+                    words = content.Split(delimiterChars);
                     //System.Console.WriteLine("{0} words in text:", words.Length);
 
                     for (int i = 0; i < words.Length; i++)
@@ -59,19 +61,9 @@ namespace GA_Example
                         txtVanBan.AppendText(words[i].ToString() + "\n");
                     }
 
-                        //txt_Result.Text = content;
+                    //txt_Result.Text = content;
                 }
             }
-        }
-
-        private void openFileDialog1_FileOk(object sender, CancelEventArgs e)
-        {
-
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
         }
 
         private void btn_Search_Click(object sender, EventArgs e)
@@ -82,7 +74,7 @@ namespace GA_Example
 
             //ga.FitnessFile = @"H:\fitness.csv";
             ga.Elitism = true;
-            ga.Go();
+            ga.Go(words);
 
             double[] values;
             double fitness;
@@ -118,19 +110,7 @@ namespace GA_Example
 		        return f1;
 	        }
 
-            private void groupBox2_Enter(object sender, EventArgs e)
-            {
-
-            }
-
-            private void txt_Path_TextChanged(object sender, EventArgs e)
-            {
-
-            }
-
-            private void groupBox5_Enter(object sender, EventArgs e)
-            {
-
-            }
+           
+           
     }
 }

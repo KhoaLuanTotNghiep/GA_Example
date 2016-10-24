@@ -193,7 +193,7 @@ namespace btl.generic
 		/// <summary>
 		/// Method which starts the GA executing.
 		/// </summary>
-		public void Go()
+        public void Go(String[] populationInput)
 		{
 			if (getFitness == null)
 				throw new ArgumentNullException("Need to supply fitness function");
@@ -207,7 +207,7 @@ namespace btl.generic
 			Genome.MutationRate = m_mutationRate;
 
 
-			CreateGenomes();
+            CreateGenomes(populationInput);
 			RankPopulation();
 
 			StreamWriter outputFitness = null;
@@ -297,14 +297,18 @@ namespace btl.generic
 		/// <summary>
 		/// Create the *initial* genomes by repeated calling the supplied fitness function
 		/// </summary>
-		private void CreateGenomes()
-		{
-			for (int i = 0; i < m_populationSize ; i++)
-			{
-				Genome g = new Genome(m_genomeSize);
-				m_thisGeneration.Add(g);
-			}
-		}
+        private void CreateGenomes(String[] populationInput)
+        {
+            for (int i = 0; i < populationInput.Length; i++)
+            {
+                if (populationInput[i].Length > 0)
+                {
+                    Genome g = new Genome(populationInput[i]);
+                    m_thisGeneration.Add(g);
+                }
+
+            }
+        }
 
 		private void CreateNextGeneration()
 		{
