@@ -33,6 +33,7 @@ namespace btl.generic
 
         public double[] m_genes;
         public string[] m_word_genes;
+        public string s_genes;
         private int m_length;
         private double m_fitness;
         static Random m_random = new Random();
@@ -44,11 +45,20 @@ namespace btl.generic
 			// TODO: Add constructor logic here
 			//
 		}
-		public Genome(int length)
+		public Genome(int position, double stringLength)
 		{
-			m_length = length;
-			m_genes = new double[ length ];
-			CreateGenes();
+            //m_length = length;
+            //m_genes = new double[ length ];
+            //CreateGenes();
+            int bitLength = (int)Math.Log(stringLength, 2);
+            string binary = Convert.ToString(position, 2);
+            int i = 0;
+            string prefix = "";
+            while (i < bitLength - binary.Length) {
+                prefix += "0";
+                i++;
+            }
+            s_genes = prefix + binary;
 		}
 		public Genome(int length, bool createGenes)
 		{
@@ -119,9 +129,9 @@ namespace btl.generic
 			}
 		}
 
-		public double[] Genes()
+		public string Genes()
 		{
-			return m_genes;
+			return s_genes;
 		}
 
 		public void Output()
