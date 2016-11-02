@@ -78,7 +78,7 @@ namespace GA_Example
             char[] delimiterChars = { ' ', ',', '.', ':', '\t' };
             words_search = txtTim.Text.Split(delimiterChars);
 
-            GA ga = new GA(0.8, 0.05, 100, 2000, 2);
+            GA ga = new GA(0.8, 0.05, words.Length, 2000, 2);
 
             ga.FitnessFunction = new GAFunction(theActualFunction);
 
@@ -122,6 +122,7 @@ namespace GA_Example
                 double b = 0.3;
                 //F(x) = a.G(x) + b.H(x)
                 int position = int.Parse(Convert.ToInt32(gene, 2).ToString());
+                double test = a * G(position, S, Sm) + b * H(position, S, Sm);
                 return a * G(position, S, Sm) + b * H(position, S, Sm);
 	        }
 
@@ -160,7 +161,7 @@ namespace GA_Example
                 int count = 0;
                 for (int i = 0; i < Sm.Length; i++)
                 {
-                    for (int j = 0; j < Sm.Length; j++)
+                    for (int j = positionX; j < Sm.Length; j++)
                     {
                         if (Sm[i] == S[j])
                             count++;

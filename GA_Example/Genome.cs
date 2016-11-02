@@ -22,6 +22,7 @@
 using System;
 using System.Collections;
 using btl.generic;
+using System.Text;
 
 namespace btl.generic
 {
@@ -33,10 +34,18 @@ namespace btl.generic
 
         public double[] m_genes;
         public string[] m_word_genes;
-        public string s_genes;
+        private string s_genes;
+
+        public string S_genes
+        {
+            get { return s_genes; }
+            set { s_genes = value; }
+        }
         private int m_length;
         private double m_fitness;
         static Random m_random = new Random();
+
+
 
 
 		public Genome()
@@ -119,6 +128,17 @@ namespace btl.generic
 			}
 		}
 
+        public void Crossover_s(ref Genome genome2, out Genome child1, out Genome child2)
+        {
+            Random rd = new Random();
+            child1 = new Genome();
+            child2 = new Genome();
+            int pos = (int)rd.Next(0, genome2.s_genes.Length - 1);
+            int lenght = genome2.S_genes.Length;
+            child1.S_genes = s_genes.Substring(0, pos) + genome2.S_genes.Substring(pos, lenght - 1);
+            child2.S_genes = genome2.s_genes.Substring(0, pos) + s_genes.Substring(pos, lenght - 1);
+        }
+
 
 		public void Mutate()
 		{
@@ -128,6 +148,22 @@ namespace btl.generic
 					m_genes[pos] = (m_genes[pos] + m_random.NextDouble())/2.0;
 			}
 		}
+
+        public void Mutate_s()
+        {
+            Random rd = new Random();
+            int pos = (int)rd.Next(0, s_genes.Length - 1);
+            StringBuilder sb = new StringBuilder(S_genes);
+            if (S_genes[pos] == '1')
+            {
+                sb[pos] = '0';
+            }
+            else
+            {
+                sb[pos] = '1';
+            }
+            S_genes = sb.ToString();
+        }
 
 		public string Genes()
 		{

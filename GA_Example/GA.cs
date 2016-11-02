@@ -329,15 +329,15 @@ namespace btl.generic
 
 				if (m_random.NextDouble() < m_crossoverRate)
 				{
-					parent1.Crossover(ref parent2, out child1, out child2);
+					parent1.Crossover_s(ref parent2, out child1, out child2);
 				}
 				else
 				{
 					child1 = parent1;
 					child2 = parent2;
 				}
-				child1.Mutate();
-				child2.Mutate();
+                child1.Mutate_s();
+                child2.Mutate_s();
 
 				m_nextGeneration.Add(child1);
 				m_nextGeneration.Add(child2);
