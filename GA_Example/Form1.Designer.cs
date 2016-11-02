@@ -57,6 +57,8 @@
             this.txtHeSoA = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.txtSoKyTu = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -69,15 +71,13 @@
             this.btnMoVB.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.btnMoVB.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnMoVB.Image = ((System.Drawing.Image)(resources.GetObject("btnMoVB.Image")));
-            this.btnMoVB.Location = new System.Drawing.Point(10, 27);
+            this.btnMoVB.Location = new System.Drawing.Point(522, 27);
             this.btnMoVB.Name = "btnMoVB";
             this.btnMoVB.Size = new System.Drawing.Size(30, 30);
             this.btnMoVB.TabIndex = 50;
             this.btnMoVB.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.btnMoVB.UseVisualStyleBackColor = false;
             this.btnMoVB.Click += new System.EventHandler(this.btnMoVB_Click);
-            // 
-            
             // 
             // lb_Path
             // 
@@ -89,7 +89,7 @@
             // 
             // txtTim
             // 
-            this.txtTim.Location = new System.Drawing.Point(51, 83);
+            this.txtTim.Location = new System.Drawing.Point(10, 84);
             this.txtTim.Multiline = true;
             this.txtTim.Name = "txtTim";
             this.txtTim.Size = new System.Drawing.Size(501, 20);
@@ -98,7 +98,7 @@
             // btnTim
             // 
             this.btnTim.Image = ((System.Drawing.Image)(resources.GetObject("btnTim.Image")));
-            this.btnTim.Location = new System.Drawing.Point(10, 74);
+            this.btnTim.Location = new System.Drawing.Point(522, 74);
             this.btnTim.Name = "btnTim";
             this.btnTim.Size = new System.Drawing.Size(30, 30);
             this.btnTim.TabIndex = 3;
@@ -132,12 +132,13 @@
             // 
             // txtDuongDan
             // 
-            this.txtDuongDan.Location = new System.Drawing.Point(51, 36);
+            this.txtDuongDan.Location = new System.Drawing.Point(10, 37);
             this.txtDuongDan.Name = "txtDuongDan";
             this.txtDuongDan.ReadOnly = true;
             this.txtDuongDan.Size = new System.Drawing.Size(501, 20);
             this.txtDuongDan.TabIndex = 51;
-            
+            this.txtDuongDan.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.txtDuongDan.TextChanged += new System.EventHandler(this.txtDuongDan_TextChanged);
             // 
             // groupBox2
             // 
@@ -148,10 +149,11 @@
             this.groupBox2.TabIndex = 52;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Văn bản";
-            
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.txtSoKyTu);
+            this.groupBox3.Controls.Add(this.label9);
             this.groupBox3.Controls.Add(this.label2);
             this.groupBox3.Controls.Add(this.txtViTriXuatHien);
             this.groupBox3.Controls.Add(this.txtLanXuatHien);
@@ -174,16 +176,16 @@
             // 
             // txtViTriXuatHien
             // 
-            this.txtViTriXuatHien.Location = new System.Drawing.Point(107, 66);
+            this.txtViTriXuatHien.Location = new System.Drawing.Point(122, 66);
             this.txtViTriXuatHien.Multiline = true;
             this.txtViTriXuatHien.Name = "txtViTriXuatHien";
             this.txtViTriXuatHien.ReadOnly = true;
-            this.txtViTriXuatHien.Size = new System.Drawing.Size(445, 57);
+            this.txtViTriXuatHien.Size = new System.Drawing.Size(430, 57);
             this.txtViTriXuatHien.TabIndex = 2;
             // 
             // txtLanXuatHien
             // 
-            this.txtLanXuatHien.Location = new System.Drawing.Point(107, 26);
+            this.txtLanXuatHien.Location = new System.Drawing.Point(452, 26);
             this.txtLanXuatHien.Name = "txtLanXuatHien";
             this.txtLanXuatHien.ReadOnly = true;
             this.txtLanXuatHien.Size = new System.Drawing.Size(100, 20);
@@ -192,7 +194,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(7, 29);
+            this.label1.Location = new System.Drawing.Point(352, 29);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(83, 13);
             this.label1.TabIndex = 0;
@@ -324,6 +326,23 @@
             this.label7.TabIndex = 0;
             this.label7.Text = "Hệ số a";
             // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(7, 29);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(109, 13);
+            this.label9.TabIndex = 4;
+            this.label9.Text = "Số ký tự của văn bản";
+            // 
+            // txtSoKyTu
+            // 
+            this.txtSoKyTu.Location = new System.Drawing.Point(122, 26);
+            this.txtSoKyTu.Name = "txtSoKyTu";
+            this.txtSoKyTu.ReadOnly = true;
+            this.txtSoKyTu.Size = new System.Drawing.Size(100, 20);
+            this.txtSoKyTu.TabIndex = 5;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -381,6 +400,8 @@
         private System.Windows.Forms.TextBox txtHeSoA;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.TextBox txtSoKyTu;
+        private System.Windows.Forms.Label label9;
     }
 }
 

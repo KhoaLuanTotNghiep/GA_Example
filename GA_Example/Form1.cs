@@ -168,6 +168,11 @@ namespace GA_Example
                 }
                 return count;
             }
+
+            private void txtDuongDan_TextChanged(object sender, EventArgs e)
+            {
+
+            }
            
     }
 }
