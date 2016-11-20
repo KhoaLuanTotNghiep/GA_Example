@@ -78,7 +78,18 @@ namespace GA_Example
             char[] delimiterChars = { ' ', ',', '.', ':', '\t' };
             words_search = txtTim.Text.Split(delimiterChars);
 
-            GA ga = new GA(0.8, 0.05, words.Length, 2000, 2);
+            int soTheHe = 0;
+            int.TryParse(txtSoTheHe.Text, out soTheHe);
+            double xacSuatLai = 0.8;
+            double.TryParse(txtXSLai.Text, out xacSuatLai);
+            double xacSuatDotBien = 0.05;
+            double.TryParse(txtXSDotBien.Text, out xacSuatDotBien);
+            double hsA = 0.7;
+            double.TryParse(txtHeSoA.Text, out hsA);
+            double hsB = 0.3;
+            double.TryParse(txtHeSoB.Text, out hsB);
+
+            GA ga = new GA(xacSuatLai, xacSuatDotBien, words.Length, soTheHe, hsA, hsB);
 
             ga.FitnessFunction = new GAFunction(theActualFunction);
 
@@ -86,17 +97,17 @@ namespace GA_Example
             ga.Elitism = true;
             ga.Go(words, words_search);
 
-            double[] values;
+            int values;
             double fitness;
             ga.GetBest(out values, out fitness);
             //System.Console.WriteLine("Best ({0}):", fitness);
             //for (int i = 0; i < values.Length; i++)
             //    System.Console.WriteLine("{0} ", values[i]);
             //label2.Text = fitness.ToString();
-            txtVanBan.AppendText(fitness.ToString() + "\n");
-
-            ga.GetWorst(out values, out fitness);
-            txtVanBan.AppendText(fitness.ToString() + "\n");
+            txtViTriXuatHien.AppendText("vi tri van ban" + values.ToString() + "\n");
+            txtViTriXuatHien.AppendText("do thich nghi" + fitness.ToString() + "\n");
+            //ga.GetWorst(out values, out fitness);
+            //txtVanBan.AppendText(fitness.ToString() + "\n");
             //label3.Text = fitness.ToString();
             //System.Console.WriteLine("\nWorst ({0}):", fitness);
             //for (int i = 0; i < values.Length; i++)
@@ -107,7 +118,7 @@ namespace GA_Example
         }
 
         //  optimal solution for this is (0.5,0.5)
-	        public static double theActualFunction(string gene, string[] S, string[] Sm)
+	        public static double theActualFunction(string gene, string[] S, string[] Sm, double hsA, double hsB)
 	        {
                 //if (values.GetLength(0) != 2)
                 //    throw new ArgumentOutOfRangeException("should only have 2 args");
@@ -118,8 +129,8 @@ namespace GA_Example
 
                 //double f1 = Math.Pow(15*x*y*(1-x)*(1-y)*Math.Sin(n*Math.PI*x)*Math.Sin(n*Math.PI*y),2);
                 //return f1;
-                double a = 0.7;
-                double b = 0.3;
+                double a = hsA;
+                double b = hsB;
                 //F(x) = a.G(x) + b.H(x)
                 int position = int.Parse(Convert.ToInt32(gene, 2).ToString());
                 double test = a * G(position, S, Sm) + b * H(position, S, Sm);
@@ -137,13 +148,13 @@ namespace GA_Example
                 {
                     L[0, j] = 0;
                 }
-                if (x == 0)
-                    x = 1;
-                for (int i = x; i < Y.Count(); i++)
+                //if (x == 0) 
+                //    x = 1;
+                for (int i = 1; i < Y.Count() && (i + x - 1) < X.Count(); i++)
                 {
                     for (int j = 1; j < Y.Count(); j++)
                     {
-                        if (X[i] == Y[j])
+                        if (X[i + x - 1] == Y[j])
                         {
                             L[i, j] = L[i - 1, j - 1] + 1;
                         }
@@ -161,7 +172,7 @@ namespace GA_Example
                 int count = 0;
                 for (int i = 0; i < Sm.Length; i++)
                 {
-                    for (int j = positionX; j < Sm.Length; j++)
+                    for (int j = positionX; j < (positionX + Sm.Length - 1) && j < S.Length; j++)
                     {
                         if (Sm[i] == S[j])
                             count++;

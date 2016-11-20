@@ -135,8 +135,12 @@ namespace btl.generic
             child2 = new Genome();
             int pos = (int)rd.Next(0, genome2.s_genes.Length - 1);
             int lenght = genome2.S_genes.Length;
-            child1.S_genes = s_genes.Substring(0, pos) + genome2.S_genes.Substring(pos, lenght - 1);
-            child2.S_genes = genome2.s_genes.Substring(0, pos) + s_genes.Substring(pos, lenght - 1);
+            string genome_t1 = s_genes;
+            string genome_t2 = genome2.s_genes;
+            child1.S_genes = genome_t1.Substring(0, pos + 1) + genome_t2.Substring(pos + 1, lenght - pos - 1);
+            genome_t1 = s_genes;
+            genome_t2 = genome2.S_genes;
+            child2.S_genes = genome_t2.Substring(0, pos + 1) + genome_t1.Substring(pos + 1, lenght - pos - 1);
         }
 
 

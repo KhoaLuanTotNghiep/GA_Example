@@ -25,7 +25,7 @@ using System.IO;
 namespace btl.generic
 {
 
-	public delegate double GAFunction(string gene, string[] S, string[] Sm);
+	public delegate double GAFunction(string gene, string[] S, string[] Sm, double hsA, double hsB);
 
 	/// <summary>
 	/// Genetic Algorithm class
@@ -47,6 +47,9 @@ namespace btl.generic
         private string m_strFitness;
         private bool m_elitism;
 
+        double hsA;
+        double hsB;
+
         private ArrayList m_thisGeneration;
         private ArrayList m_nextGeneration;
         private ArrayList m_fitnessTable;
@@ -56,6 +59,10 @@ namespace btl.generic
 
 
 		static private GAFunction getFitness;
+        private double xacSuatLai;
+        private System.Windows.Forms.TextBox txtXSDotBien;
+        private int p;
+        private int soTheHe;
 		public GAFunction FitnessFunction
 		{
 			get	
@@ -177,11 +184,24 @@ namespace btl.generic
 			m_strFitness = "";
 		}
 
+        public GA(double crossoverRate, double mutationRate, int populationSize, int generationSize, double a, double b)
+        {
+            InitialValues();
+            m_mutationRate = mutationRate;
+            m_crossoverRate = crossoverRate;
+            m_populationSize = populationSize;
+            m_generationSize = generationSize;
+            this.hsA = a;
+            this.hsB = b;
+            m_strFitness = "";
+        }
+
 		public GA(int genomeSize)
 		{
 			InitialValues();
 			m_genomeSize = genomeSize;
 		}
+
 
 
 		public void InitialValues()
@@ -197,8 +217,8 @@ namespace btl.generic
 		{
 			if (getFitness == null)
 				throw new ArgumentNullException("Need to supply fitness function");
-			if (m_genomeSize == 0)
-				throw new IndexOutOfRangeException("Genome size not set");
+            //if (m_genomeSize == 0)
+            //    throw new IndexOutOfRangeException("Genome size not set");
 
 			//  Create the fitness table.
 			m_fitnessTable = new ArrayList();
@@ -218,7 +238,7 @@ namespace btl.generic
 				outputFitness = new StreamWriter(m_strFitness);
 			}
 
-            for (int i = 0; i < populationInput.Length; i++)
+            for (int i = 0; i < m_generationSize; i++)
 			{
 				CreateNextGeneration();
                 RankPopulation(populationInput, Sm);
@@ -279,7 +299,7 @@ namespace btl.generic
 			for (int i = 0; i < S.Length; i++)
 			{
 				Genome g = ((Genome) m_thisGeneration[i]);
-				g.Fitness = FitnessFunction(g.Genes(), S, Sm);
+				g.Fitness = FitnessFunction(g.Genes(), S, Sm, hsA, hsB);
 				m_totalFitness += g.Fitness;
 			}
 			m_thisGeneration.Sort(new GenomeComparer());
@@ -351,11 +371,12 @@ namespace btl.generic
 		}
 
 
-		public void GetBest(out double[] values, out double fitness)
+		public void GetBest(out int values, out double fitness)
 		{
 			Genome g = ((Genome)m_thisGeneration[m_populationSize-1]);
-			values = new double[g.Length];
-			g.GetValues(ref values);
+            //values = new double[g.Length];
+            //g.GetValues(ref values);
+            values = int.Parse(Convert.ToInt32(g.S_genes, 2).ToString());
 			fitness = (double)g.Fitness;
 		}
 
