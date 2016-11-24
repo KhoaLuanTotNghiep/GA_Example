@@ -27,6 +27,11 @@ namespace GA_Example
             ToolTip1.SetToolTip(this.btnMoVB, "Mở văn bản");
             System.Windows.Forms.ToolTip ToolTip2 = new System.Windows.Forms.ToolTip();
             ToolTip2.SetToolTip(this.btnTim, "Tìm");
+            txtSoTheHe.Text = "100";
+            txtXSLai.Text = "0.8";
+            txtXSDotBien.Text = "0.05";
+            txtHeSoA.Text = "0.7";
+            txtHeSoB.Text = "0.3";
         }
 
         private void btnMoVB_Click(object sender, EventArgs e)
@@ -48,6 +53,7 @@ namespace GA_Example
                 {
                     txtDuongDan.Text = path;
                     content = reader.ReadToEnd();
+                    txtVanBan.Text = content;
 
                     char[] delimiterChars = { ' ', ',', '.', ':', '\t' };
 
@@ -61,12 +67,13 @@ namespace GA_Example
                             result.Add(item);
                     }
                     words = result.ToArray();
+                    txtSoKyTu.Text = words.Count().ToString();
                     //System.Console.WriteLine("{0} words in text:", words.Length);
 
-                    for (int i = 0; i < words.Length; i++)
-                    {
-                        txtVanBan.AppendText(words[i].ToString() + "\n");
-                    }
+                    //for (int i = 0; i < words.Length; i++)
+                    //{
+                    //    txtVanBan.AppendText(words[i].ToString() + "\n");
+                    //}
 
                     //txt_Result.Text = content;
                 }
@@ -75,46 +82,62 @@ namespace GA_Example
 
         private void btn_Search_Click(object sender, EventArgs e)
         {
-            char[] delimiterChars = { ' ', ',', '.', ':', '\t' };
-            words_search = txtTim.Text.Split(delimiterChars);
+            if (checkInput() == "")
+            {
+                char[] delimiterChars = { ' ', ',', '.', ':', '\t' };
+                words_search = txtTim.Text.Split(delimiterChars);
 
-            int soTheHe = 0;
-            int.TryParse(txtSoTheHe.Text, out soTheHe);
-            double xacSuatLai = 0.8;
-            double.TryParse(txtXSLai.Text, out xacSuatLai);
-            double xacSuatDotBien = 0.05;
-            double.TryParse(txtXSDotBien.Text, out xacSuatDotBien);
-            double hsA = 0.7;
-            double.TryParse(txtHeSoA.Text, out hsA);
-            double hsB = 0.3;
-            double.TryParse(txtHeSoB.Text, out hsB);
+                int soTheHe = 0;
+                int.TryParse(txtSoTheHe.Text, out soTheHe);
+                double xacSuatLai = 0.8;
+                double.TryParse(txtXSLai.Text, out xacSuatLai);
+                double xacSuatDotBien = 0.05;
+                double.TryParse(txtXSDotBien.Text, out xacSuatDotBien);
+                double hsA = 0.7;
+                double.TryParse(txtHeSoA.Text, out hsA);
+                double hsB = 0.3;
+                double.TryParse(txtHeSoB.Text, out hsB);
 
-            GA ga = new GA(xacSuatLai, xacSuatDotBien, words.Length, soTheHe, hsA, hsB);
+                GA ga = new GA(xacSuatLai, xacSuatDotBien, words.Length, soTheHe, hsA, hsB);
 
-            ga.FitnessFunction = new GAFunction(theActualFunction);
+                ga.FitnessFunction = new GAFunction(theActualFunction);
 
-            //ga.FitnessFile = @"H:\fitness.csv";
-            ga.Elitism = true;
-            ga.Go(words, words_search);
+                //ga.FitnessFile = @"H:\fitness.csv";
+                ga.Elitism = true;
+                ga.Go(words, words_search);
 
-            int values;
-            double fitness;
-            ga.GetBest(out values, out fitness);
-            //System.Console.WriteLine("Best ({0}):", fitness);
-            //for (int i = 0; i < values.Length; i++)
-            //    System.Console.WriteLine("{0} ", values[i]);
-            //label2.Text = fitness.ToString();
-            txtViTriXuatHien.AppendText("vi tri van ban" + values.ToString() + "\n");
-            txtViTriXuatHien.AppendText("do thich nghi" + fitness.ToString() + "\n");
-            //ga.GetWorst(out values, out fitness);
-            //txtVanBan.AppendText(fitness.ToString() + "\n");
-            //label3.Text = fitness.ToString();
-            //System.Console.WriteLine("\nWorst ({0}):", fitness);
-            //for (int i = 0; i < values.Length; i++)
-            //    System.Console.WriteLine("{0} ", values[i]);
+                int values;
+                double fitness;
+                ga.GetBest(out values, out fitness);
+                //System.Console.WriteLine("Best ({0}):", fitness);
+                //for (int i = 0; i < values.Length; i++)
+                //    System.Console.WriteLine("{0} ", values[i]);
+                //label2.Text = fitness.ToString();
+                txtViTriXuatHien.Clear();
+                txtViTriXuatHien.AppendText("vi tri van ban " + values.ToString() + "\n");
+                txtViTriXuatHien.AppendText("do thich nghi " + fitness.ToString() + "\n");
+                //ga.GetWorst(out values, out fitness);
+                //txtVanBan.AppendText(fitness.ToString() + "\n");
+                //label3.Text = fitness.ToString();
+                //System.Console.WriteLine("\nWorst ({0}):", fitness);
+                //for (int i = 0; i < values.Length; i++)
+                //    System.Console.WriteLine("{0} ", values[i]);
 
-            //Console.ReadLine();
+                //Console.ReadLine();
+            }
+            else
+                MessageBox.Show(checkInput());
             
+        }
+
+        private string checkInput() 
+        {
+            string result = "";
+            if (words == null)
+                result += "Vui lòng chọn tệp tin văn bản\n";
+            if (txtTim.Text == "")
+                result += "Vui lòng nhập văn bản cần tìm\n";
+            return result;
         }
 
         //  optimal solution for this is (0.5,0.5)

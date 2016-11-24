@@ -63,7 +63,7 @@ namespace btl.generic
             string binary = Convert.ToString(position, 2);
             int i = 0;
             string prefix = "";
-            while (i < bitLength - binary.Length) {
+            while (i <= bitLength - binary.Length) {
                 prefix += "0";
                 i++;
             }
