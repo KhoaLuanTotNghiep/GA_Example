@@ -195,7 +195,7 @@ namespace GA_Example
                 int count = 0;
                 for (int i = 0; i < Sm.Length; i++)
                 {
-                    for (int j = positionX; j < (positionX + Sm.Length - 1) && j < S.Length; j++)
+                    for (int j = positionX; j < (positionX + Sm.Length) && j < S.Length; j++)
                     {
                         if (Sm[i] == S[j])
                             count++;
