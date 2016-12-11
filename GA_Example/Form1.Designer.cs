@@ -39,6 +39,8 @@
             this.txtDuongDan = new System.Windows.Forms.TextBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.txtSoKyTu = new System.Windows.Forms.TextBox();
+            this.label9 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.txtViTriXuatHien = new System.Windows.Forms.TextBox();
             this.txtLanXuatHien = new System.Windows.Forms.TextBox();
@@ -57,8 +59,6 @@
             this.txtHeSoA = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
-            this.txtSoKyTu = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -164,6 +164,23 @@
             this.groupBox3.TabIndex = 53;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Kết quả";
+            // 
+            // txtSoKyTu
+            // 
+            this.txtSoKyTu.Location = new System.Drawing.Point(122, 26);
+            this.txtSoKyTu.Name = "txtSoKyTu";
+            this.txtSoKyTu.ReadOnly = true;
+            this.txtSoKyTu.Size = new System.Drawing.Size(100, 20);
+            this.txtSoKyTu.TabIndex = 5;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(7, 29);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(95, 13);
+            this.label9.TabIndex = 4;
+            this.label9.Text = "Số từ của văn bản";
             // 
             // label2
             // 
@@ -325,23 +342,6 @@
             this.label7.Size = new System.Drawing.Size(44, 13);
             this.label7.TabIndex = 0;
             this.label7.Text = "Hệ số a";
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(7, 29);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(109, 13);
-            this.label9.TabIndex = 4;
-            this.label9.Text = "Số ký tự của văn bản";
-            // 
-            // txtSoKyTu
-            // 
-            this.txtSoKyTu.Location = new System.Drawing.Point(122, 26);
-            this.txtSoKyTu.Name = "txtSoKyTu";
-            this.txtSoKyTu.ReadOnly = true;
-            this.txtSoKyTu.Size = new System.Drawing.Size(100, 20);
-            this.txtSoKyTu.TabIndex = 5;
             // 
             // Form1
             // 
