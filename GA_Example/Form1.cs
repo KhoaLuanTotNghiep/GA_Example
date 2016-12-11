@@ -114,7 +114,7 @@ namespace GA_Example
                 //    System.Console.WriteLine("{0} ", values[i]);
                 //label2.Text = fitness.ToString();
                 txtViTriXuatHien.Clear();
-                txtViTriXuatHien.AppendText("vi tri van ban " + values.ToString() + "\n");
+                txtViTriXuatHien.AppendText("vi tri van ban " + (1+ values).ToString() + "\n");
                 txtViTriXuatHien.AppendText("do thich nghi " + fitness.ToString() + "\n");
                 //ga.GetWorst(out values, out fitness);
                 //txtVanBan.AppendText(fitness.ToString() + "\n");
