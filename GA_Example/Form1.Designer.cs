@@ -59,6 +59,7 @@
             this.txtHeSoA = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
+            this.txtResult = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -90,10 +91,10 @@
             // txtTim
             // 
             this.txtTim.Location = new System.Drawing.Point(10, 84);
-            this.txtTim.Multiline = true;
             this.txtTim.Name = "txtTim";
             this.txtTim.Size = new System.Drawing.Size(501, 20);
             this.txtTim.TabIndex = 2;
+            this.txtTim.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtTim_KeyDown);
             // 
             // btnTim
             // 
@@ -152,6 +153,7 @@
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.txtResult);
             this.groupBox3.Controls.Add(this.txtSoKyTu);
             this.groupBox3.Controls.Add(this.label9);
             this.groupBox3.Controls.Add(this.label2);
@@ -160,7 +162,7 @@
             this.groupBox3.Controls.Add(this.label1);
             this.groupBox3.Location = new System.Drawing.Point(9, 378);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(561, 129);
+            this.groupBox3.Size = new System.Drawing.Size(561, 201);
             this.groupBox3.TabIndex = 53;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Kết quả";
@@ -343,11 +345,19 @@
             this.label7.TabIndex = 0;
             this.label7.Text = "Hệ số a";
             // 
+            // txtResult
+            // 
+            this.txtResult.Location = new System.Drawing.Point(122, 129);
+            this.txtResult.Multiline = true;
+            this.txtResult.Name = "txtResult";
+            this.txtResult.Size = new System.Drawing.Size(430, 66);
+            this.txtResult.TabIndex = 6;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(851, 519);
+            this.ClientSize = new System.Drawing.Size(851, 591);
             this.Controls.Add(this.groupBox5);
             this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.groupBox3);
@@ -402,6 +412,7 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.TextBox txtSoKyTu;
         private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.TextBox txtResult;
     }
 }
 

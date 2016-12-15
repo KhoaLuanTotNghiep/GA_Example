@@ -8,6 +8,8 @@ using System.Text;
 using System.Windows.Forms;
 using System.IO;
 using btl.generic;
+using iTextSharp.text.pdf;
+using iTextSharp.text.pdf.parser;
 
 namespace GA_Example
 {
@@ -43,44 +45,59 @@ namespace GA_Example
             //openFileDialog1.FileName .....
             //}
             OpenFileDialog dialog = new OpenFileDialog();
-            dialog.Filter = "Text files | *.txt"; // file types, that will be allowed to upload
+            dialog.Filter = "Text files | *.pdf"; // file types, that will be allowed to upload
             dialog.Multiselect = false; // allow/deny user to upload more than one file at a time
             if (dialog.ShowDialog() == DialogResult.OK) // if user clicked OK
             {
+                
                 String path = dialog.FileName; // get name of file
-                string content;
-                using (StreamReader reader = new StreamReader(new FileStream(path, FileMode.Open), new UTF8Encoding())) // do anything you want, e.g. read it
+                //string content;
+                PdfReader reader = new PdfReader(path);
+                string text = string.Empty;
+                for (int page = 1; page <= reader.NumberOfPages; page++)
                 {
-                    txtDuongDan.Text = path;
-                    content = reader.ReadToEnd();
-                    txtVanBan.Text = content;
-
-                    char[] delimiterChars = { ' ', ',', '.', ':', '\t' };
-
-                    //string text = "one\ttwo three:four,five six seven";
-                    //System.Console.WriteLine("Original text: '{0}'", text);
-                    string[] splitText = content.Split(delimiterChars);
-                    List<string> result = new List<string>();
-                    foreach (string item in splitText)
-                    {
-                        if (item != "")
-                            result.Add(item);
-                    }
-                    words = result.ToArray();
-                    txtSoKyTu.Text = words.Count().ToString();
-                    //System.Console.WriteLine("{0} words in text:", words.Length);
-
-                    //for (int i = 0; i < words.Length; i++)
-                    //{
-                    //    txtVanBan.AppendText(words[i].ToString() + "\n");
-                    //}
-
-                    //txt_Result.Text = content;
+                    text += PdfTextExtractor.GetTextFromPage(reader, page);
                 }
+                reader.Close();
+                txtVanBan.Text = text;
+                //using (StreamReader reader = new StreamReader(new FileStream(path, FileMode.Open), new UTF8Encoding())) // do anything you want, e.g. read it
+                //{
+                txtDuongDan.Text = path;
+                //    content = reader.ReadToEnd();
+                //    txtVanBan.Text = content;
+
+                char[] delimiterChars = { ' ', ',', '.', ':', '\t' };
+
+                //    //string text = "one\ttwo three:four,five six seven";
+                //    //System.Console.WriteLine("Original text: '{0}'", text);
+                string[] splitText = text.Split(delimiterChars);
+                List<string> result = new List<string>();
+                foreach (string item in splitText)
+                {
+                    if (item != "")
+                        result.Add(item);
+                }
+                words = result.ToArray();
+                txtSoKyTu.Text = words.Count().ToString();
+                //    //System.Console.WriteLine("{0} words in text:", words.Length);
+
+                //    //for (int i = 0; i < words.Length; i++)
+                //    //{
+                //    //    txtVanBan.AppendText(words[i].ToString() + "\n");
+                //    //}
+
+                //    //txt_Result.Text = content;
+                //}
             }
         }
 
         private void btn_Search_Click(object sender, EventArgs e)
+        {
+            executeSearch();
+            
+        }
+
+        private void executeSearch()
         {
             if (checkInput() == "")
             {
@@ -114,8 +131,16 @@ namespace GA_Example
                 //    System.Console.WriteLine("{0} ", values[i]);
                 //label2.Text = fitness.ToString();
                 txtViTriXuatHien.Clear();
-                txtViTriXuatHien.AppendText("vi tri van ban " + (1+ values).ToString() + "\n");
+                txtViTriXuatHien.AppendText("vi tri van ban " + (1 + values).ToString() + "\n");
                 txtViTriXuatHien.AppendText("do thich nghi " + fitness.ToString() + "\n");
+                string textResult = "";
+                int i = 0;
+                while (i < 20)
+                {
+                    textResult += words[values + i] + " ";
+                    i++;
+                }
+                txtResult.Text = textResult;
                 //ga.GetWorst(out values, out fitness);
                 //txtVanBan.AppendText(fitness.ToString() + "\n");
                 //label3.Text = fitness.ToString();
@@ -127,7 +152,6 @@ namespace GA_Example
             }
             else
                 MessageBox.Show(checkInput());
-            
         }
 
         private string checkInput() 
@@ -207,6 +231,15 @@ namespace GA_Example
             private void txtDuongDan_TextChanged(object sender, EventArgs e)
             {
 
+            }
+
+            private void txtTim_KeyDown(object sender, KeyEventArgs e)
+            {
+                
+                if (e.KeyValue == 13)
+                {
+                    executeSearch();
+                }
             }
            
     }
