@@ -29,6 +29,10 @@ namespace GA_Example
             ToolTip1.SetToolTip(this.btnMoVB, "Mở văn bản");
             System.Windows.Forms.ToolTip ToolTip2 = new System.Windows.Forms.ToolTip();
             ToolTip2.SetToolTip(this.btnTim, "Tìm");
+            System.Windows.Forms.ToolTip ToolTip3 = new System.Windows.Forms.ToolTip();
+            ToolTip3.SetToolTip(this.btnBack, "Trước");
+            System.Windows.Forms.ToolTip ToolTip4 = new System.Windows.Forms.ToolTip();
+            ToolTip4.SetToolTip(this.btnNext, "Sau");
             txtSoTheHe.Text = "100";
             txtXSLai.Text = "0.8";
             txtXSDotBien.Text = "0.05";
@@ -240,6 +244,11 @@ namespace GA_Example
                 {
                     executeSearch();
                 }
+            }
+
+            private void groupBox1_Enter(object sender, EventArgs e)
+            {
+
             }
            
     }
