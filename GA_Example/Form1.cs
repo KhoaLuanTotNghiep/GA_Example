@@ -250,6 +250,11 @@ namespace GA_Example
             {
 
             }
+
+            private void label10_Click(object sender, EventArgs e)
+            {
+
+            }
            
     }
 }
