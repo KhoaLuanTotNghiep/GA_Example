@@ -134,6 +134,7 @@ namespace btl.generic
             child1 = new Genome();
             child2 = new Genome();
             int pos = (int)rd.Next(0, genome2.s_genes.Length - 1);
+            pos = (int)genome2.s_genes.Length / 2;
             int lenght = genome2.S_genes.Length;
             string genome_t1 = s_genes;
             string genome_t2 = genome2.s_genes;
@@ -158,14 +159,18 @@ namespace btl.generic
             Random rd = new Random();
             int pos = (int)rd.Next(0, s_genes.Length - 1);
             StringBuilder sb = new StringBuilder(S_genes);
-            if (S_genes[pos] == '1')
+            if (m_random.NextDouble() < m_mutationRate)
             {
-                sb[pos] = '0';
+                if (S_genes[pos] == '1')
+                {
+                    sb[pos] = '0';
+                }
+                else
+                {
+                    sb[pos] = '1';
+                }
             }
-            else
-            {
-                sb[pos] = '1';
-            }
+            
             S_genes = sb.ToString();
         }
 

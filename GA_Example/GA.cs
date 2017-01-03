@@ -51,6 +51,12 @@ namespace btl.generic
         double hsB;
 
         private ArrayList m_thisGeneration;
+
+        public ArrayList ThisGeneration
+        {
+            get { return m_thisGeneration; }
+            set { m_thisGeneration = value; }
+        }
         private ArrayList m_nextGeneration;
         private ArrayList m_fitnessTable;
 
@@ -239,18 +245,10 @@ namespace btl.generic
 			}
 
             for (int i = 0; i < m_generationSize; i++)
-			{
-				CreateNextGeneration();
+            {
+                CreateNextGeneration();
                 RankPopulation(populationInput, Sm);
-				if (write)
-				{
-					if (outputFitness != null)
-					{
-						double d = (double)((Genome)m_thisGeneration[m_populationSize-1]).Fitness;
-						outputFitness.WriteLine("{0},{1}",i,d);
-					}
-				}
-			}
+            }
 			if (outputFitness != null)
 				outputFitness.Close();
 		}
@@ -339,29 +337,30 @@ namespace btl.generic
 			if (m_elitism)
 				g = (Genome)m_thisGeneration[m_populationSize - 1];
 
-			for (int i = 0 ; i < m_populationSize ; i+=2)
-			{
-				int pidx1 = RouletteSelection();
-				int pidx2 = RouletteSelection();
-				Genome parent1, parent2, child1, child2;
-				parent1 = ((Genome) m_thisGeneration[pidx1]);
-				parent2 = ((Genome) m_thisGeneration[pidx2]);
+            for (int i = 0; i < m_populationSize; i += 2)
+            {
+                int pidx1 = RouletteSelection();
+                int pidx2 = RouletteSelection();
+                Genome parent1, parent2, child1, child2;
+                parent1 = ((Genome)m_thisGeneration[pidx1]);
+                parent2 = ((Genome)m_thisGeneration[pidx2]);
 
-				if (m_random.NextDouble() < m_crossoverRate)
-				{
-					parent1.Crossover_s(ref parent2, out child1, out child2);
-				}
-				else
-				{
-					child1 = parent1;
-					child2 = parent2;
-				}
+                if (m_random.NextDouble() < m_crossoverRate)
+                {
+                    parent1.Crossover_s(ref parent2, out child1, out child2);
+                }
+                else
+                {
+                    child1 = parent1;
+                    child2 = parent2;
+                }
                 child1.Mutate_s();
                 child2.Mutate_s();
 
-				m_nextGeneration.Add(child1);
-				m_nextGeneration.Add(child2);
-			}
+                m_nextGeneration.Add(child1);
+                m_nextGeneration.Add(child2);
+            }
+			
 			if (m_elitism && g != null)
 				m_nextGeneration[0] = g;
 

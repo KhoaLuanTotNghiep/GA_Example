@@ -10,6 +10,7 @@ using System.IO;
 using btl.generic;
 using iTextSharp.text.pdf;
 using iTextSharp.text.pdf.parser;
+using System.Collections;
 
 namespace GA_Example
 {
@@ -22,6 +23,7 @@ namespace GA_Example
 
         string[] words;
         string[] words_search;
+        private ArrayList words_result;
 
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -127,21 +129,41 @@ namespace GA_Example
                 ga.Elitism = true;
                 ga.Go(words, words_search);
 
-                int values;
-                double fitness;
-                ga.GetBest(out values, out fitness);
-                //System.Console.WriteLine("Best ({0}):", fitness);
-                //for (int i = 0; i < values.Length; i++)
-                //    System.Console.WriteLine("{0} ", values[i]);
-                //label2.Text = fitness.ToString();
+                //int values;
+                //double fitness;
+                //ga.GetBest(out values, out fitness);
+                ////System.Console.WriteLine("Best ({0}):", fitness);
+                ////for (int i = 0; i < values.Length; i++)
+                ////    System.Console.WriteLine("{0} ", values[i]);
+                ////label2.Text = fitness.ToString();
+                //txtViTriXuatHien.Clear();
+                //txtViTriXuatHien.AppendText("vi tri van ban " + (1 + values).ToString() + "\n");
+                //txtViTriXuatHien.AppendText("do thich nghi " + fitness.ToString() + "\n");
+                //string textResult = "";
+                //int i = 0;
+                //while (i < 20)
+                //{
+                //    textResult += words[values + i] + " ";
+                //    i++;
+                //}
+                //txtResult.Text = textResult;
+
+                this.words_result = ga.ThisGeneration;
+
+                List<StoreResult> list = getResultPosition();
+
+
                 txtViTriXuatHien.Clear();
-                txtViTriXuatHien.AppendText("vi tri van ban " + (1 + values).ToString() + "\n");
-                txtViTriXuatHien.AppendText("do thich nghi " + fitness.ToString() + "\n");
-                string textResult = "";
-                int i = 0;
-                while (i < 20)
+                foreach (StoreResult item in list)
                 {
-                    textResult += words[values + i] + " ";
+                    txtViTriXuatHien.AppendText(item.position + " ");
+                }
+                
+                string textResult = ""; 
+                int i = 0;
+                while (i < 20 && (list[0].position + i) < words.Length)
+                {
+                    textResult += words[list[0].position + i] + " ";
                     i++;
                 }
                 txtResult.Text = textResult;
@@ -156,6 +178,33 @@ namespace GA_Example
             }
             else
                 MessageBox.Show(checkInput());
+        }
+
+        private List<StoreResult> getResultPosition()
+        {
+            List<StoreResult> list = new List<StoreResult>();
+            int searchTextLength = words_search.Length;
+            Genome g_last = ((Genome)words_result[words_result.Count - 1]);
+            int position_last = int.Parse(Convert.ToInt32(g_last.S_genes, 2).ToString());
+            StoreResult result_last = new StoreResult();
+            result_last.position = position_last;
+            result_last.fitness = g_last.Fitness;
+            list.Add(result_last);
+            for (int i = words_result.Count - 2; i > 0; i--)
+            {
+                Genome g = ((Genome)words_result[i]);
+                int position = int.Parse(Convert.ToInt32(g.S_genes, 2).ToString());
+
+                if ((list[list.Count - 1].position + searchTextLength) < position && g.Fitness > 0)
+                {
+                    StoreResult sr = new StoreResult();
+                    sr.position = position;
+                    sr.fitness = g.Fitness;
+                    list.Add(sr);
+                }
+            }
+
+            return list;
         }
 
         private string checkInput() 
@@ -254,6 +303,11 @@ namespace GA_Example
             private void label10_Click(object sender, EventArgs e)
             {
 
+            }
+
+            class StoreResult {
+                public int position { get; set; }
+                public double fitness { get; set; }
             }
            
     }
