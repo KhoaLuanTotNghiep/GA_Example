@@ -11,6 +11,7 @@ using btl.generic;
 using iTextSharp.text.pdf;
 using iTextSharp.text.pdf.parser;
 using System.Collections;
+using System.Text.RegularExpressions;
 
 namespace GA_Example
 {
@@ -31,10 +32,6 @@ namespace GA_Example
             ToolTip1.SetToolTip(this.btnMoVB, "Mở văn bản");
             System.Windows.Forms.ToolTip ToolTip2 = new System.Windows.Forms.ToolTip();
             ToolTip2.SetToolTip(this.btnTim, "Tìm");
-            System.Windows.Forms.ToolTip ToolTip3 = new System.Windows.Forms.ToolTip();
-            ToolTip3.SetToolTip(this.btnBack, "Trước");
-            System.Windows.Forms.ToolTip ToolTip4 = new System.Windows.Forms.ToolTip();
-            ToolTip4.SetToolTip(this.btnNext, "Sau");
             txtSoTheHe.Text = "100";
             txtXSLai.Text = "0.8";
             txtXSDotBien.Text = "0.05";
@@ -72,7 +69,8 @@ namespace GA_Example
                 //    content = reader.ReadToEnd();
                 //    txtVanBan.Text = content;
 
-                char[] delimiterChars = { ' ', ',', '.', ':', '\t' };
+                //char[] delimiterChars = { ' ', ',', '.', ':', '\t' };
+                char[] delimiterChars = { ' ', '\t' };
 
                 //    //string text = "one\ttwo three:four,five six seven";
                 //    //System.Console.WriteLine("Original text: '{0}'", text);
@@ -108,6 +106,7 @@ namespace GA_Example
             if (checkInput() == "")
             {
                 char[] delimiterChars = { ' ', ',', '.', ':', '\t' };
+                //char[] delimiterChars = { ' ', '\t' };
                 words_search = txtTim.Text.Split(delimiterChars);
 
                 int soTheHe = 0;
@@ -154,19 +153,67 @@ namespace GA_Example
 
 
                 txtViTriXuatHien.Clear();
+                txtResult.Clear();
                 foreach (StoreResult item in list)
                 {
                     txtViTriXuatHien.AppendText(item.position + " ");
+                    int tmpPos = item.position;
+                    bool flag = false;
+                    int i = tmpPos;
+                    if (tmpPos == 0 || tmpPos == 1)
+                    {
+                        while (flag == false)
+                        {
+                            if (words[i].Contains("."))
+                            {
+                                txtResult.AppendText(words[i]);
+                                flag = true;
+                            }
+                            else
+                            {
+                                txtResult.AppendText(words[i] + " ");
+                                i++;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        i = tmpPos;
+                        int startSen = i;
+                        while (flag == false)
+                        {
+                            if (words[i].Contains(".") || i == 0)
+                            {
+                                startSen = i + 1;
+                                flag = true;
+                            }
+                            else
+                            {
+                                i--;
+                            }
+                        }
+                        flag = false;
+                        while (flag == false)
+                        {
+                            if (words[startSen].Contains("."))
+                            {
+                                txtResult.AppendText(words[startSen]);
+                                flag = true;
+                            }
+                            else
+                            {
+                                txtResult.AppendText(words[startSen] + " ");
+                                startSen++;
+                            }
+                        }
+                    }
+                    txtResult.AppendText("\n");
+                     
+                    //txtResult.Text = textResult;
                 }
                 
-                string textResult = ""; 
-                int i = 0;
-                while (i < 20 && (list[0].position + i) < words.Length)
-                {
-                    textResult += words[list[0].position + i] + " ";
-                    i++;
-                }
-                txtResult.Text = textResult;
+                
+                
                 //ga.GetWorst(out values, out fitness);
                 //txtVanBan.AppendText(fitness.ToString() + "\n");
                 //label3.Text = fitness.ToString();
@@ -254,7 +301,8 @@ namespace GA_Example
                 {
                     for (int j = 1; j < Y.Count(); j++)
                     {
-                        if (X[i + x - 1] == Y[j])
+                        string tmp = Regex.Replace(X[i + x - 1], "[^0-9a-zA-Z]+", "");
+                        if (tmp == Y[j])
                         {
                             L[i, j] = L[i - 1, j - 1] + 1;
                         }
@@ -274,7 +322,8 @@ namespace GA_Example
                 {
                     for (int j = positionX; j < (positionX + Sm.Length) && j < S.Length; j++)
                     {
-                        if (Sm[i] == S[j])
+                        string tmp = Regex.Replace(S[j], "[^0-9a-zA-Z]+", "");
+                        if (Sm[i] == tmp)
                             count++;
                     }
                 }

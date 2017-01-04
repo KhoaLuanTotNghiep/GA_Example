@@ -39,9 +39,6 @@
             this.txtDuongDan = new System.Windows.Forms.TextBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.btnNext = new System.Windows.Forms.Button();
-            this.btnBack = new System.Windows.Forms.Button();
-            this.label10 = new System.Windows.Forms.Label();
             this.txtResult = new System.Windows.Forms.TextBox();
             this.txtSoKyTu = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
@@ -59,9 +56,7 @@
             this.txtHeSoA = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.lbViTri = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -172,11 +167,6 @@
             // groupBox3
             // 
             this.groupBox3.BackColor = System.Drawing.Color.Transparent;
-            this.groupBox3.Controls.Add(this.lbViTri);
-            this.groupBox3.Controls.Add(this.label1);
-            this.groupBox3.Controls.Add(this.textBox1);
-            this.groupBox3.Controls.Add(this.btnNext);
-            this.groupBox3.Controls.Add(this.btnBack);
             this.groupBox3.Controls.Add(this.label10);
             this.groupBox3.Controls.Add(this.txtResult);
             this.groupBox3.Controls.Add(this.txtSoKyTu);
@@ -192,53 +182,14 @@
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Kết quả";
             // 
-            // btnNext
-            // 
-            this.btnNext.BackColor = System.Drawing.Color.Transparent;
-            this.btnNext.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnNext.BackgroundImage")));
-            this.btnNext.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnNext.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnNext.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnNext.ForeColor = System.Drawing.Color.MediumBlue;
-            this.btnNext.Location = new System.Drawing.Point(65, 165);
-            this.btnNext.Name = "btnNext";
-            this.btnNext.Size = new System.Drawing.Size(25, 25);
-            this.btnNext.TabIndex = 9;
-            this.btnNext.UseVisualStyleBackColor = false;
-            // 
-            // btnBack
-            // 
-            this.btnBack.BackColor = System.Drawing.Color.Transparent;
-            this.btnBack.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnBack.BackgroundImage")));
-            this.btnBack.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnBack.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnBack.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnBack.ForeColor = System.Drawing.Color.MediumBlue;
-            this.btnBack.Location = new System.Drawing.Point(31, 165);
-            this.btnBack.Name = "btnBack";
-            this.btnBack.Size = new System.Drawing.Size(25, 25);
-            this.btnBack.TabIndex = 8;
-            this.btnBack.UseVisualStyleBackColor = false;
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.ForeColor = System.Drawing.Color.Snow;
-            this.label10.Location = new System.Drawing.Point(7, 132);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(121, 26);
-            this.label10.TabIndex = 7;
-            this.label10.Text = "Câu chứa từ cần tìm\r\n   tương ứng vị trí";
-            this.label10.Click += new System.EventHandler(this.label10_Click);
-            // 
             // txtResult
             // 
             this.txtResult.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtResult.Location = new System.Drawing.Point(134, 129);
+            this.txtResult.Location = new System.Drawing.Point(134, 101);
             this.txtResult.Multiline = true;
             this.txtResult.Name = "txtResult";
-            this.txtResult.Size = new System.Drawing.Size(418, 66);
+            this.txtResult.ReadOnly = true;
+            this.txtResult.Size = new System.Drawing.Size(418, 94);
             this.txtResult.TabIndex = 6;
             // 
             // txtSoKyTu
@@ -279,7 +230,7 @@
             this.txtViTriXuatHien.Multiline = true;
             this.txtViTriXuatHien.Name = "txtViTriXuatHien";
             this.txtViTriXuatHien.ReadOnly = true;
-            this.txtViTriXuatHien.Size = new System.Drawing.Size(418, 57);
+            this.txtViTriXuatHien.Size = new System.Drawing.Size(418, 29);
             this.txtViTriXuatHien.TabIndex = 2;
             // 
             // groupBox4
@@ -406,32 +357,17 @@
             this.label7.TabIndex = 0;
             this.label7.Text = "Hệ số a";
             // 
-            // textBox1
+            // label10
             // 
-            this.textBox1.Location = new System.Drawing.Point(452, 26);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(100, 20);
-            this.textBox1.TabIndex = 10;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.ForeColor = System.Drawing.Color.Snow;
-            this.label1.Location = new System.Drawing.Point(269, 29);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(134, 13);
-            this.label1.TabIndex = 11;
-            this.label1.Text = "Độ thích nghi tại vị trí";
-            // 
-            // lbViTri
-            // 
-            this.lbViTri.AutoSize = true;
-            this.lbViTri.ForeColor = System.Drawing.Color.Snow;
-            this.lbViTri.Location = new System.Drawing.Point(405, 29);
-            this.lbViTri.Name = "lbViTri";
-            this.lbViTri.Size = new System.Drawing.Size(15, 13);
-            this.lbViTri.TabIndex = 12;
-            this.lbViTri.Text = "--";
+            this.label10.AutoSize = true;
+            this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label10.ForeColor = System.Drawing.Color.Snow;
+            this.label10.Location = new System.Drawing.Point(7, 104);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(121, 26);
+            this.label10.TabIndex = 7;
+            this.label10.Text = "Câu chứa từ cần tìm\r\n   tương ứng vị trí";
+            this.label10.Click += new System.EventHandler(this.label10_Click);
             // 
             // Form1
             // 
@@ -493,11 +429,6 @@
         private System.Windows.Forms.TextBox txtResult;
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.Button btnNext;
-        private System.Windows.Forms.Button btnBack;
-        private System.Windows.Forms.Label lbViTri;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox textBox1;
     }
 }
 
