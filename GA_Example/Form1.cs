@@ -32,7 +32,7 @@ namespace GA_Example
             ToolTip1.SetToolTip(this.btnMoVB, "Mở văn bản");
             System.Windows.Forms.ToolTip ToolTip2 = new System.Windows.Forms.ToolTip();
             ToolTip2.SetToolTip(this.btnTim, "Tìm");
-            txtSoTheHe.Text = "100";
+            txtSoTheHe.Text = "10";
             txtXSLai.Text = "0.8";
             txtXSDotBien.Text = "0.05";
             txtHeSoA.Text = "0.7";
@@ -160,11 +160,11 @@ namespace GA_Example
                     int tmpPos = item.position;
                     bool flag = false;
                     int i = tmpPos;
-                    if (tmpPos == 0 || tmpPos == 1)
+                    if (tmpPos == 0)
                     {
                         while (flag == false)
                         {
-                            if (words[i].Contains("."))
+                            if (words[i].Contains(".") || words[i].Contains("?") || words[i].Contains("!"))
                             {
                                 txtResult.AppendText(words[i]);
                                 flag = true;
@@ -182,9 +182,9 @@ namespace GA_Example
                         int startSen = i;
                         while (flag == false)
                         {
-                            if (words[i].Contains(".") || i == 0)
+                            if (words[i].Contains(".") || i == 0 || words[i].Contains("?") || words[i].Contains("!"))
                             {
-                                startSen = i + 1;
+                                startSen = i == 0? 0 : i + 1;
                                 flag = true;
                             }
                             else
@@ -195,7 +195,7 @@ namespace GA_Example
                         flag = false;
                         while (flag == false)
                         {
-                            if (words[startSen].Contains("."))
+                            if (words[startSen].Contains(".") || words[i].Contains("?") || words[i].Contains("!"))
                             {
                                 txtResult.AppendText(words[startSen]);
                                 flag = true;
