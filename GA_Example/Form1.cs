@@ -195,7 +195,7 @@ namespace GA_Example
                         flag = false;
                         while (flag == false)
                         {
-                            if (words[startSen].Contains(".") || words[i].Contains("?") || words[i].Contains("!"))
+                            if (words[startSen].Contains(".") || words[startSen].Contains("?") || words[startSen].Contains("!"))
                             {
                                 txtResult.AppendText(words[startSen]);
                                 flag = true;
@@ -207,6 +207,7 @@ namespace GA_Example
                             }
                         }
                     }
+                    txtResult.AppendText("\n");
                     txtResult.AppendText("\n");
                      
                     //txtResult.Text = textResult;
