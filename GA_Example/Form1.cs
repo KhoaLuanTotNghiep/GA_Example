@@ -120,6 +120,8 @@ namespace GA_Example
                 double hsB = 0.3;
                 double.TryParse(txtHeSoB.Text, out hsB);
 
+                
+
                 GA ga = new GA(xacSuatLai, xacSuatDotBien, words.Length, soTheHe, hsA, hsB);
 
                 ga.FitnessFunction = new GAFunction(theActualFunction);
@@ -260,8 +262,18 @@ namespace GA_Example
             string result = "";
             if (words == null)
                 result += "Vui lòng chọn tệp tin văn bản\n";
-            if (txtTim.Text == "")
+            if (txtTim.Text.Trim() == "")
                 result += "Vui lòng nhập văn bản cần tìm\n";
+            if (txtSoTheHe.Text.Trim() == "")
+                result += "Vui lòng nhập số thế hệ\n";
+            if (txtXSLai.Text.Trim() == "")
+                result += "Vui lòng nhập xác suất lai\n";
+            if(txtXSDotBien.Text.Trim() == "")
+                result += "Vui lòng nhập xác suất đột biến\n";
+            if (txtHeSoA.Text.Trim() == "")
+                result += "Vui lòng nhập hệ số A\n";
+            if (txtHeSoB.Text.Trim() == "")
+                result += "Vui lòng nhập hệ số B";
             return result;
         }
 
@@ -359,6 +371,99 @@ namespace GA_Example
                 public int position { get; set; }
                 public double fitness { get; set; }
             }
+
+            private void txtHeSoA_KeyPress(object sender, KeyPressEventArgs e)
+            {
+                if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != '.'))
+                {
+                    e.Handled = true;
+                }
+                if ((e.KeyChar == '.') && ((sender as TextBox).Text.IndexOf('.') > -1))
+                {
+                    e.Handled = true;
+                }
+                
+            }
+
+            private void txtHeSoB_KeyPress(object sender, KeyPressEventArgs e)
+            {
+                if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != '.'))
+                {
+                    e.Handled = true;
+                }
+                if ((e.KeyChar == '.') && ((sender as TextBox).Text.IndexOf('.') > -1))
+                {
+                    e.Handled = true;
+                }
+            }
+
+            private void txtHeSoA_Leave(object sender, EventArgs e)
+            {
+                
+            }
+
+            private string checkValidInputFactor(string input)
+            {
+                string result = "";
+                if (input.Trim() != "")
+                {
+                    float hs = float.Parse(input.Trim());
+                    if (hs < 0 || hs > 1)
+                        result += "Vui lòng nhập hệ số thực từ 0 - 1";
+                }
+                return result;
+            }
+
+            private void txtSoTheHe_KeyPress(object sender, KeyPressEventArgs e)
+            {
+                if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+                {
+                    e.Handled = true;
+                }
+            }
+
+            private void txtXSLai_KeyPress(object sender, KeyPressEventArgs e)
+            {
+                if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != '.'))
+                {
+                    e.Handled = true;
+                }
+                if ((e.KeyChar == '.') && ((sender as TextBox).Text.IndexOf('.') > -1))
+                {
+                    e.Handled = true;
+                }
+            }
+
+            private void txtXSDotBien_KeyPress(object sender, KeyPressEventArgs e)
+            {
+                if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != '.'))
+                {
+                    e.Handled = true;
+                }
+                if ((e.KeyChar == '.') && ((sender as TextBox).Text.IndexOf('.') > -1))
+                {
+                    e.Handled = true;
+                }
+            }
+
+            private void txtHeSoA_TextChanged(object sender, EventArgs e)
+            {
+                if (txtHeSoA.Text.Trim() == "")
+                    txtHeSoA.Text = "0";
+                string checkValid = checkValidInputFactor(txtHeSoA.Text);
+                if (checkValid == "")
+                {
+                    float hsA = float.Parse(txtHeSoA.Text.Trim());
+                    txtHeSoB.Text = (1 - hsA).ToString();
+                }
+                else
+                {
+                    MessageBox.Show(checkValid);
+                    txtHeSoA.Text = "0";
+                }
+            }
+
+            
            
     }
 }

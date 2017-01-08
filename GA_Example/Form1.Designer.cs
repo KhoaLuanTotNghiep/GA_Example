@@ -270,6 +270,7 @@
             this.txtXSDotBien.Name = "txtXSDotBien";
             this.txtXSDotBien.Size = new System.Drawing.Size(100, 20);
             this.txtXSDotBien.TabIndex = 7;
+            this.txtXSDotBien.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtXSDotBien_KeyPress);
             // 
             // txtXSLai
             // 
@@ -277,6 +278,7 @@
             this.txtXSLai.Name = "txtXSLai";
             this.txtXSLai.Size = new System.Drawing.Size(100, 20);
             this.txtXSLai.TabIndex = 6;
+            this.txtXSLai.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtXSLai_KeyPress);
             // 
             // txtSoTheHe
             // 
@@ -284,6 +286,7 @@
             this.txtSoTheHe.Name = "txtSoTheHe";
             this.txtSoTheHe.Size = new System.Drawing.Size(100, 20);
             this.txtSoTheHe.TabIndex = 5;
+            this.txtSoTheHe.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtSoTheHe_KeyPress);
             // 
             // label6
             // 
@@ -340,6 +343,7 @@
             this.txtHeSoB.Name = "txtHeSoB";
             this.txtHeSoB.Size = new System.Drawing.Size(117, 20);
             this.txtHeSoB.TabIndex = 3;
+            this.txtHeSoB.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtHeSoB_KeyPress);
             // 
             // txtHeSoA
             // 
@@ -347,6 +351,9 @@
             this.txtHeSoA.Name = "txtHeSoA";
             this.txtHeSoA.Size = new System.Drawing.Size(117, 20);
             this.txtHeSoA.TabIndex = 2;
+            this.txtHeSoA.TextChanged += new System.EventHandler(this.txtHeSoA_TextChanged);
+            this.txtHeSoA.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtHeSoA_KeyPress);
+            this.txtHeSoA.Leave += new System.EventHandler(this.txtHeSoA_Leave);
             // 
             // label8
             // 
