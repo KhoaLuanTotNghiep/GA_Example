@@ -177,7 +177,7 @@
             this.groupBox3.ForeColor = System.Drawing.Color.Yellow;
             this.groupBox3.Location = new System.Drawing.Point(9, 378);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(561, 209);
+            this.groupBox3.Size = new System.Drawing.Size(830, 308);
             this.groupBox3.TabIndex = 53;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Kết quả";
@@ -187,7 +187,7 @@
             this.label10.AutoSize = true;
             this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label10.ForeColor = System.Drawing.Color.Snow;
-            this.label10.Location = new System.Drawing.Point(7, 104);
+            this.label10.Location = new System.Drawing.Point(7, 157);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(121, 26);
             this.label10.TabIndex = 7;
@@ -197,12 +197,12 @@
             // txtResult
             // 
             this.txtResult.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtResult.Location = new System.Drawing.Point(134, 101);
+            this.txtResult.Location = new System.Drawing.Point(134, 130);
             this.txtResult.Multiline = true;
             this.txtResult.Name = "txtResult";
             this.txtResult.ReadOnly = true;
             this.txtResult.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtResult.Size = new System.Drawing.Size(418, 94);
+            this.txtResult.Size = new System.Drawing.Size(681, 168);
             this.txtResult.TabIndex = 6;
             // 
             // txtSoKyTu
@@ -230,7 +230,7 @@
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.Color.Snow;
-            this.label2.Location = new System.Drawing.Point(7, 69);
+            this.label2.Location = new System.Drawing.Point(7, 55);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(91, 13);
             this.label2.TabIndex = 3;
@@ -239,11 +239,12 @@
             // txtViTriXuatHien
             // 
             this.txtViTriXuatHien.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtViTriXuatHien.Location = new System.Drawing.Point(134, 66);
+            this.txtViTriXuatHien.Location = new System.Drawing.Point(134, 52);
             this.txtViTriXuatHien.Multiline = true;
             this.txtViTriXuatHien.Name = "txtViTriXuatHien";
             this.txtViTriXuatHien.ReadOnly = true;
-            this.txtViTriXuatHien.Size = new System.Drawing.Size(418, 29);
+            this.txtViTriXuatHien.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.txtViTriXuatHien.Size = new System.Drawing.Size(681, 72);
             this.txtViTriXuatHien.TabIndex = 2;
             // 
             // groupBox4
@@ -383,7 +384,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.ClientSize = new System.Drawing.Size(851, 591);
+            this.ClientSize = new System.Drawing.Size(851, 693);
             this.Controls.Add(this.groupBox5);
             this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.groupBox3);
@@ -391,6 +392,7 @@
             this.Controls.Add(this.groupBox1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = " Phần mềm tìm kiếm văn bản bằng giải thuật di truyền";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.groupBox1.ResumeLayout(false);

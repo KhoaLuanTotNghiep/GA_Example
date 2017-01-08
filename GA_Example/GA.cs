@@ -21,6 +21,8 @@
 using System;
 using System.Collections;
 using System.IO;
+using GA_Example;
+using System.Collections.Generic;
 
 namespace btl.generic
 {
@@ -219,7 +221,7 @@ namespace btl.generic
 		/// <summary>
 		/// Method which starts the GA executing.
 		/// </summary>
-        public void Go(String[] populationInput, string[] Sm)
+        public void Go(List<Individual> indList, String[] populationInput, string[] Sm)
 		{
 			if (getFitness == null)
 				throw new ArgumentNullException("Need to supply fitness function");
@@ -233,8 +235,8 @@ namespace btl.generic
 			Genome.MutationRate = m_mutationRate;
 
 
-            CreateGenomes(populationInput);
-			RankPopulation(populationInput, Sm);
+            CreateGenomes(indList, populationInput);
+            RankPopulation(indList, populationInput, Sm);
 
 			StreamWriter outputFitness = null;
 			bool write = false;
@@ -247,7 +249,7 @@ namespace btl.generic
             for (int i = 0; i < m_generationSize; i++)
             {
                 CreateNextGeneration();
-                RankPopulation(populationInput, Sm);
+                RankPopulation(indList, populationInput, Sm);
             }
 			if (outputFitness != null)
 				outputFitness.Close();
@@ -291,42 +293,58 @@ namespace btl.generic
 		/// <summary>
 		/// Rank population and sort in order of fitness.
 		/// </summary>
-		private void RankPopulation(string[] S, string[] Sm)
+		private void RankPopulation(List<Individual> indList, string[] S, string[] Sm)
 		{
 			m_totalFitness = 0;
-			for (int i = 0; i < S.Length; i++)
-			{
-				Genome g = ((Genome) m_thisGeneration[i]);
-				g.Fitness = FitnessFunction(g.Genes(), S, Sm, hsA, hsB);
-				m_totalFitness += g.Fitness;
-			}
+            //for (int i = 0; i < S.Length; i++)
+            //{
+            //    Genome g = ((Genome) m_thisGeneration[i]);
+            //    g.Fitness = FitnessFunction(g.Genes(), S, Sm, hsA, hsB);
+            //    m_totalFitness += g.Fitness;
+            //}
+            for (int i = 0; i < indList.Count; i++)
+            {
+                Genome g = ((Genome)m_thisGeneration[i]);
+                g.Fitness = FitnessFunction(g.Genes(), S, Sm, hsA, hsB);
+                m_totalFitness += g.Fitness;
+            }
 			m_thisGeneration.Sort(new GenomeComparer());
 
 			//  now sorted in order of fitness.
 			double fitness = 0.0;
 			m_fitnessTable.Clear();
-            for (int i = 0; i < S.Length; i++)
-			{
-				fitness += ((Genome)m_thisGeneration[i]).Fitness;
-				m_fitnessTable.Add((double)fitness);
-			}
+            //for (int i = 0; i < S.Length; i++)
+            //{
+            //    fitness += ((Genome)m_thisGeneration[i]).Fitness;
+            //    m_fitnessTable.Add((double)fitness);
+            //}
+            for (int i = 0; i < indList.Count; i++)
+            {
+                fitness += ((Genome)m_thisGeneration[i]).Fitness;
+                m_fitnessTable.Add((double)fitness);
+            }
 		}
 
 		/// <summary>
 		/// Create the *initial* genomes by repeated calling the supplied fitness function
 		/// </summary>
-        private void CreateGenomes(String[] populationInput)
+        private void CreateGenomes(List<Individual> indList, String[] populationInput)
         {
-            for (int i = 0; i < populationInput.Length; i++)
-            {
-                Genome g = new Genome(i, populationInput.Length);
-                m_thisGeneration.Add(g);
-                //if (populationInput[i].Length > 0)
-                //
-                //    Genome g = new Genome(populationInput[i]);
-                //    m_thisGeneration.Add(g);
-                //}
+            //for (int i = 0; i < populationInput.Length; i++)
+            //{
+            //    Genome g = new Genome(i, populationInput.Length);
+            //    m_thisGeneration.Add(g);
+            //    //if (populationInput[i].Length > 0)
+            //    //
+            //    //    Genome g = new Genome(populationInput[i]);
+            //    //    m_thisGeneration.Add(g);
+            //    //}
 
+            //}
+            foreach (Individual item in indList)
+            {
+                Genome g = new Genome(item.position, populationInput.Length);
+                m_thisGeneration.Add(g);
             }
         }
 

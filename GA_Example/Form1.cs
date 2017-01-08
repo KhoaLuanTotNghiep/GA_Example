@@ -120,15 +120,26 @@ namespace GA_Example
                 double hsB = 0.3;
                 double.TryParse(txtHeSoB.Text, out hsB);
 
-                
+                List<Individual> indList = new List<Individual>();
 
-                GA ga = new GA(xacSuatLai, xacSuatDotBien, words.Length, soTheHe, hsA, hsB);
+                for (int i = 0; i < words.Length; i++ )
+                {
+                    if (txtTim.Text.Contains(words[i]))
+                    {
+                        Individual ind = new Individual(i, words[i]);
+                        indList.Add(ind);
+                    }
+
+                }
+
+                //GA ga = new GA(xacSuatLai, xacSuatDotBien, words.Length, soTheHe, hsA, hsB);
+                GA ga = new GA(xacSuatLai, xacSuatDotBien, indList.Count, soTheHe, hsA, hsB);
 
                 ga.FitnessFunction = new GAFunction(theActualFunction);
 
                 //ga.FitnessFile = @"H:\fitness.csv";
                 ga.Elitism = true;
-                ga.Go(words, words_search);
+                ga.Go(indList, words, words_search);
 
                 //int values;
                 //double fitness;
@@ -151,32 +162,39 @@ namespace GA_Example
 
                 this.words_result = ga.ThisGeneration;
 
-                List<StoreResult> list = getResultPosition();
+                List<int> list = getResultPosition();
 
 
                 txtViTriXuatHien.Clear();
                 txtResult.Clear();
-                foreach (StoreResult item in list)
+                string textResult;
+                List<string> arrayResult = new List<string>();
+                foreach (int item in list)
                 {
-                    txtViTriXuatHien.AppendText(item.position + " ");
-                    int tmpPos = item.position;
+                    txtViTriXuatHien.AppendText(item + " - ");
+                    int tmpPos = item;
                     bool flag = false;
                     int i = tmpPos;
+                    textResult = "";
                     if (tmpPos == 0)
                     {
                         while (flag == false)
                         {
                             if (words[i].Contains(".") || words[i].Contains("?") || words[i].Contains("!"))
                             {
-                                txtResult.AppendText(words[i]);
+                                //txtResult.AppendText(words[i]);
+                                textResult += words[i];
                                 flag = true;
                             }
                             else
                             {
-                                txtResult.AppendText(words[i] + " ");
+                                //txtResult.AppendText(words[i] + " ");
+                                textResult += words[i] + " ";
                                 i++;
                             }
                         }
+                        if(!arrayResult.Contains(textResult))
+                            arrayResult.Add(textResult);
                     }
                     else
                     {
@@ -186,7 +204,7 @@ namespace GA_Example
                         {
                             if (words[i].Contains(".") || i == 0 || words[i].Contains("?") || words[i].Contains("!"))
                             {
-                                startSen = i == 0? 0 : i + 1;
+                                startSen = i == 0 ? 0 : i + 1;
                                 flag = true;
                             }
                             else
@@ -199,20 +217,31 @@ namespace GA_Example
                         {
                             if (words[startSen].Contains(".") || words[startSen].Contains("?") || words[startSen].Contains("!"))
                             {
-                                txtResult.AppendText(words[startSen]);
+                                //txtResult.AppendText(words[startSen]);
+                                textResult += words[startSen];
                                 flag = true;
                             }
                             else
                             {
-                                txtResult.AppendText(words[startSen] + " ");
+                                //txtResult.AppendText(words[startSen] + " ");
+                                textResult += words[startSen] + " ";
                                 startSen++;
                             }
                         }
+                        if (!arrayResult.Contains(textResult))
+                            arrayResult.Add(textResult);
                     }
-                    txtResult.AppendText("\n");
-                    txtResult.AppendText("\n");
+                    //txtResult.AppendText("\n");
+                    //txtResult.AppendText("\n");
                      
                     //txtResult.Text = textResult;
+                }
+
+                foreach (string item in arrayResult)
+                {
+                    txtResult.AppendText(item);
+                    txtResult.AppendText("\n");
+                    txtResult.AppendText("\n");
                 }
                 
                 
@@ -230,31 +259,35 @@ namespace GA_Example
                 MessageBox.Show(checkInput());
         }
 
-        private List<StoreResult> getResultPosition()
+        private List<int> getResultPosition()
         {
-            List<StoreResult> list = new List<StoreResult>();
-            int searchTextLength = words_search.Length;
-            Genome g_last = ((Genome)words_result[words_result.Count - 1]);
-            int position_last = int.Parse(Convert.ToInt32(g_last.S_genes, 2).ToString());
-            StoreResult result_last = new StoreResult();
-            result_last.position = position_last;
-            result_last.fitness = g_last.Fitness;
-            list.Add(result_last);
+            //List<StoreResult> list = new List<StoreResult>();
+            List<int> list2 = new List<int>();
+            //int searchTextLength = words_search.Length;
+            //Genome g_last = ((Genome)words_result[words_result.Count - 1]);
+
+            //int position_last = int.Parse(Convert.ToInt32(g_last.S_genes, 2).ToString());
+            //StoreResult result_last = new StoreResult();
+            //result_last.position = position_last;
+            //result_last.fitness = g_last.Fitness;
+            //list.Add(result_last);
             for (int i = words_result.Count - 2; i > 0; i--)
             {
                 Genome g = ((Genome)words_result[i]);
                 int position = int.Parse(Convert.ToInt32(g.S_genes, 2).ToString());
 
-                if ((list[list.Count - 1].position + searchTextLength) < position && g.Fitness > 0)
+                if (g.Fitness > 0 && words.Length >= position)
                 {
-                    StoreResult sr = new StoreResult();
-                    sr.position = position;
-                    sr.fitness = g.Fitness;
-                    list.Add(sr);
+                    //StoreResult sr = new StoreResult();
+                    //sr.position = position;
+                    //sr.fitness = 0;
+                    //if(!list.Contains(sr))
+                    //    list.Add(sr);
+                    if (!list2.Contains(position))
+                        list2.Add(position);
                 }
             }
-
-            return list;
+            return list2;
         }
 
         private string checkInput() 
@@ -369,7 +402,7 @@ namespace GA_Example
 
             class StoreResult {
                 public int position { get; set; }
-                public double fitness { get; set; }
+                //public double fitness { get; set; }
             }
 
             private void txtHeSoA_KeyPress(object sender, KeyPressEventArgs e)
