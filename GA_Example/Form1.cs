@@ -132,6 +132,8 @@ namespace GA_Example
 
                 }
 
+                txtKichThuocQuanThe.Text = indList.Count.ToString();
+
                 //GA ga = new GA(xacSuatLai, xacSuatDotBien, words.Length, soTheHe, hsA, hsB);
                 GA ga = new GA(xacSuatLai, xacSuatDotBien, indList.Count, soTheHe, hsA, hsB);
 
