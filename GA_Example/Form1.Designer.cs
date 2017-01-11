@@ -57,8 +57,6 @@
             this.txtHeSoA = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
-            this.txtKichThuocQuanThe = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -169,8 +167,6 @@
             // groupBox3
             // 
             this.groupBox3.BackColor = System.Drawing.Color.Transparent;
-            this.groupBox3.Controls.Add(this.txtKichThuocQuanThe);
-            this.groupBox3.Controls.Add(this.label1);
             this.groupBox3.Controls.Add(this.label10);
             this.groupBox3.Controls.Add(this.txtResult);
             this.groupBox3.Controls.Add(this.txtSoKyTu);
@@ -191,7 +187,7 @@
             this.label10.AutoSize = true;
             this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label10.ForeColor = System.Drawing.Color.Snow;
-            this.label10.Location = new System.Drawing.Point(7, 157);
+            this.label10.Location = new System.Drawing.Point(7, 135);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(121, 26);
             this.label10.TabIndex = 7;
@@ -382,24 +378,6 @@
             this.label7.TabIndex = 0;
             this.label7.Text = "Hệ số a";
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(260, 29);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(124, 13);
-            this.label1.TabIndex = 8;
-            this.label1.Text = "Kích thước quần thể";
-            // 
-            // txtKichThuocQuanThe
-            // 
-            this.txtKichThuocQuanThe.AutoSize = true;
-            this.txtKichThuocQuanThe.Location = new System.Drawing.Point(410, 29);
-            this.txtKichThuocQuanThe.Name = "txtKichThuocQuanThe";
-            this.txtKichThuocQuanThe.Size = new System.Drawing.Size(15, 13);
-            this.txtKichThuocQuanThe.TabIndex = 9;
-            this.txtKichThuocQuanThe.Text = "--";
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -461,8 +439,6 @@
         private System.Windows.Forms.TextBox txtResult;
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.Label txtKichThuocQuanThe;
-        private System.Windows.Forms.Label label1;
     }
 }
 
